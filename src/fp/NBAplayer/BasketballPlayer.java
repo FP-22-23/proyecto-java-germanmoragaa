@@ -22,8 +22,8 @@ public class BasketballPlayer implements Comparable <BasketballPlayer> {
     
 	public BasketballPlayer(String name, int height, int age, int salary, Double points, Double assists, boolean finals, LocalDate drafted, List<String> partidos) {
 		Checkers.check("La edad no puede ser menor a 18", age > 18);
-		Checkers.check("El salario no puede ser menor al salario mínimo establecido por la NBA", salary > 925258);
-		Checkers.check("La fecha del draft no puede ser anterior al 23 de junio de 2017", drafted.isBefore(LocalDate.of(2017, 6, 23)));
+		//Checkers.check("El salario no puede ser menor al salario mínimo establecido por la NBA", salary == 0 || salary > 100000);
+		Checkers.check("La fecha del draft no puede ser anterior al 23 de junio de 2018", drafted.isBefore(LocalDate.of(2018, 6, 23)));
 		this.name = name;
         this.height = height;
         this.age = age;
@@ -38,7 +38,7 @@ public class BasketballPlayer implements Comparable <BasketballPlayer> {
 	//Constructor 2
 	
 	public BasketballPlayer(String name, int salary) {
-		Checkers.check("El salario no puede ser menor al salario mínimo establecido por la NBA", salary > 925258);
+		//Checkers.check("El salario no puede ser menor al salario mínimo establecido por la NBA", salary != 0 || salary > 100000);
         this.name = name;
         this.salary = salary;
         
