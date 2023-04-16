@@ -8,19 +8,19 @@ import fp.utiles.Checkers;
 public class BasketballPlayer implements Comparable <BasketballPlayer> {
 
 	private String name;
-    private int height;
-    private int age;
-    private int salary;
+    private Integer height;
+    private Integer age;
+    private Integer salary;
     private Double points;
     private Double assists;
-    private boolean finals;
+    private Boolean finals;
     private LocalDate drafted;
     private List<String> partidos;
     private Rol rol;
 
     //Constructor 1
     
-	public BasketballPlayer(String name, int height, int age, int salary, Double points, Double assists, boolean finals, LocalDate drafted, List<String> partidos) {
+	public BasketballPlayer(String name, Integer height, Integer age, Integer salary, Double points, Double assists, Boolean finals, LocalDate drafted, List<String> partidos) {
 		Checkers.check("La edad no puede ser menor a 18", age > 18);
 		//Checkers.check("El salario no puede ser menor al salario mínimo establecido por la NBA", salary == 0 || salary > 100000);
 		Checkers.check("La fecha del draft no puede ser anterior al 23 de junio de 2018", drafted.isBefore(LocalDate.of(2018, 6, 23)));
@@ -37,7 +37,7 @@ public class BasketballPlayer implements Comparable <BasketballPlayer> {
 	
 	//Constructor 2
 	
-	public BasketballPlayer(String name, int salary) {
+	public BasketballPlayer(String name, Integer salary) {
 		//Checkers.check("El salario no puede ser menor al salario mínimo establecido por la NBA", salary != 0 || salary > 100000);
         this.name = name;
         this.salary = salary;
@@ -50,15 +50,15 @@ public class BasketballPlayer implements Comparable <BasketballPlayer> {
         return name;
     }
 
-    public int getHeight() {
+    public Integer getHeight() {
         return height;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public int getSalary() {
+    public Integer getSalary() {
         return salary;
     }
 
@@ -70,7 +70,7 @@ public class BasketballPlayer implements Comparable <BasketballPlayer> {
         return assists;
     }
 
-    public boolean getFinals() {
+    public Boolean getFinals() {
         return finals;
     }
 
@@ -84,7 +84,7 @@ public class BasketballPlayer implements Comparable <BasketballPlayer> {
         
     }
     
-    public void setSalary(int salary) {
+    public void setSalary(Integer salary) {
 		this.salary = salary;
 	}
 

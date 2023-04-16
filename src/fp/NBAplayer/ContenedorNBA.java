@@ -97,11 +97,11 @@ private List<BasketballPlayer> jugadores;
 	//2. Media de los puntos por partido de todos los jugadores de la NBA 
 	
 	public double mediaPPP() {
-		int totalPuntos = 0;
+		double totalPuntos = 0;
 	    for (BasketballPlayer jugador : jugadores) {
 	        totalPuntos += jugador.getPoints();
 	    }
-	    return (double) totalPuntos / jugadores.size();
+	    return (totalPuntos / jugadores.size());
 	}
 
 
@@ -121,7 +121,7 @@ private List<BasketballPlayer> jugadores;
 	
 	//4. Map que agrupa el nombre de los jugadores con sus salarios
 	
-	public Map<String, List<Integer>> agruparPorNombre(List<BasketballPlayer> jugadores) {
+	public Map<String, List<Integer>> agruparPorNombre() {
 	    Map<String, List<Integer>> mapa = new HashMap<>();
 
 	    for (BasketballPlayer jugador : jugadores) {
@@ -138,7 +138,7 @@ private List<BasketballPlayer> jugadores;
 	
 	//5. Map que agrupa las edades de los jugadores con la suma de PPP de todos los de dicha edad
 	
-	public Map<Integer, Double> acumularPorPuntos(List<BasketballPlayer> jugadores) {
+	public Map<Integer, Double> acumularPorPuntos() {
 	    Map<Integer, Double> mapa = new HashMap<>();
 
 	    for (BasketballPlayer jugador : jugadores) {

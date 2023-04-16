@@ -82,41 +82,50 @@ y Superstar si es mayor o igual a 30.
 
 
 #### Tipos auxiliares
-Descripción de los tipos auxiliares que sean necesarios añadir al proyecto.
+No hago uso de tipos auxiliares.
 
 ### Factoría
-Descripción breve de la factoría.
-
-- _método 1_: Descripción del método 1.
--	_método 2_: Descripción del método 2.
+La factoría sirve para leer y parsear los datos de los jugadores de la NBA desde nuestro archivo CSV.
+- leerJugadores: recibe una cadena de texto que representa la ruta y nombre de un archivo CSV. Hacemos uso de Files.lines para obtener un Stream con las 
+líneas del archivo, salta la primera línea, aplica el método parsePlayer a cada línea usando map y crea un objeto 
+ContenedorNBA objetos BasketballPlayer y devuelve ese objeto.
+- parsePlayer: recibe una línea de texto con los datos de un jugador. Este método separa los campos de la línea utilizando split, 
+parsea los datos de cada campo y crea un objeto BasketballPlayer con los datos obtenidos, este es el objeto que devuelve.
 
 ### Tipo Contenedor
 
-Descripción breve del tipo contenedor.
+Mi tipo contenedor cuenta con una lista de objetos de la clase BasketballPlayer y proporciona métodos para operar en esta lista, como añadir y eliminar jugadores, 
+filtrarlos entre otras cosas.
 
 **Propiedades**:
 
-- _propiedad1_, de tipo \<Tipo1\>, consultable. 
-- _propiedad2_, de tipo \<Tipo2\>, consultable y modificable. 
-- ...
+- jugadores, de tipo lista de objetos BasketballPlayer, consultable y modificable. 
+
 - 
 **Constructores**: 
 
-- C1: Descripción del constructor 1.
-- C2: Descripción del constructor 2.
-- ...
+- C1: Constructor sin argumentos que crea un objeto ContenedorNBA vacío, sin jugadores.
+- C2: Constructor que toma un objeto Stream<BasketballPlayer> como argumento, y crea un objeto ContenedorNBA a partir de una colección de jugadores.
+- C3: Constructor que toma una colección de jugadores como argumento, y crea un objeto ContenedorNBA a partir de esta colección.
 
-**Restricciones**:
- 
-- R1: Descripción de la restricción 1.
-- R2: Descripción de la restricción 2.
-- ...
-- 
-**Criterio de igualdad**: Describir el criterio de igualdad
-
-**Criterio de ordenación**: Describir el criterio de ordenación (si lo hay).
+**Criterio de igualdad**: El criterio de igualdad se basa en la comparación de dos objetos ContenedorNBA, los cuales son iguales si contienen las mismas listas de jugadores en el mismo orden.
 
 **Otras operaciones**:
  
--	_método 1_: Descripción del método 1.
-- ...
+-getNumJugadores(): devuelve el número de jugadores.
+
+-anyadirJugador(BasketballPlayer jugador): añade un jugador al contenedor.
+
+-anyadirJugadores(Collection<BasketballPlayer> jugadores): añade una colección de jugadores al contenedor.
+
+-eliminarJugador(BasketballPlayer jugador): elimina un jugador del contenedor.
+
+-existeJugadorQueGaneMas(Integer n): devuelve true si hay algún jugador en el contenedor que gane más de n dólares.
+
+-mediaPPP(): devuelve la media de los puntos por partido de todos los jugadores del contenedor.
+
+-filtrarPorSalario(Integer minSal): devuelve una lista de jugadores cuyo salario es mayor o igual que minSal.
+
+-agruparPorNombre(): devuelve un mapa que agrupa el nombre de los jugadores con sus salarios.
+
+-acumularPorPuntos(): devuelve un mapa que agrupa las edades de los jugadores con la suma de PPP de todos los de dicha edad.
