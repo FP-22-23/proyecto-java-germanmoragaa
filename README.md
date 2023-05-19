@@ -129,3 +129,23 @@ filtrarlos entre otras cosas.
 -agruparPorNombre(): devuelve un mapa que agrupa el nombre de los jugadores con sus salarios.
 
 -acumularPorPuntos(): devuelve un mapa que agrupa las edades de los jugadores con la suma de PPP de todos los de dicha edad.
+
+-existeJugadorQuePromedieNPuntosConMEdad(Double n, Integer m): verifica si hay un jugador con un promedio de puntos mayor o igual a 'n' y una edad mayor o igual a 'm'.
+
+-mediaPuntosJugadoresEnRangoEdad(Integer edadMin, Integer edadMax): calcula la media de puntos de los jugadores en un rango de edad específico.
+
+-filtrarPorAltura(Integer altura): filtra los jugadores por altura y devuelve una lista con ellos.
+
+-jugadorConMasPuntosMayorQueN(Integer n): devuelve el jugador con más puntos entre aquellos con una edad mayor o igual a 'n'.
+
+-filtrarPorAlturaOrdenadoPorSalario(Integer altura): filtra los jugadores por altura y los ordena por salario.
+
+-acumularPorAsistencias(): agrupa las edades de los jugadores y suma las asistencias para cada edad.
+
+-agruparJugadoresPorRol(): agrupa los nombres de los jugadores por su rol.
+
+-jugadoresMasPagadosPorAltura(): devuelve el jugador mejor pagado para cada altura.
+
+-agrupaJugadoresPorAlturaEnFuncionDelSalario(Integer n): agrupa los jugadores por altura, ordenados por salario y con un límite de 'n' jugadores por altura.
+
+-jugadorMVP(): devuelve el nombre del jugador con la mayor suma de PPP+APP a partir de un mapa de producción de los jugadores.

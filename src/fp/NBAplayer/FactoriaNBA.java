@@ -45,7 +45,8 @@ public class FactoriaNBA {
         LocalDate drafted = LocalDate.parse(campos[7].trim(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         //List<String> partidos = Arrays.asList(campos[8].trim().split(","));
         List<String> partidos = parsearLista(campos[8].trim());
-        res = new BasketballPlayer(name, height, age, salary, points, assists, finals, drafted, partidos);
+        Jugador jugadorRecord = new Jugador(campos[0].trim(), Integer.parseInt(campos[1].trim()));
+        res = new BasketballPlayer(name, height, age, salary, points, assists, finals, drafted, partidos, jugadorRecord);
         return res;
     }
   

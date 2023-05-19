@@ -17,10 +17,12 @@ public class BasketballPlayer implements Comparable <BasketballPlayer> {
     private LocalDate drafted;
     private List<String> partidos;
     private Rol rol;
+    private Jugador jugadorRecord;
 
     //Constructor 1
     
-	public BasketballPlayer(String name, Integer height, Integer age, Integer salary, Double points, Double assists, Boolean finals, LocalDate drafted, List<String> partidos) {
+	public BasketballPlayer(String name, Integer height, Integer age, Integer salary, Double points, Double assists, Boolean finals, LocalDate drafted, List<String> partidos,
+			Jugador jugadorRecord) {
 		Checkers.check("La edad no puede ser menor a 18", age > 18);
 		//Checkers.check("El salario no puede ser menor al salario mínimo establecido por la NBA", salary == 0 || salary > 100000);
 		Checkers.check("La fecha del draft no puede ser anterior al 23 de junio de 2018", drafted.isBefore(LocalDate.of(2018, 6, 23)));
@@ -33,6 +35,7 @@ public class BasketballPlayer implements Comparable <BasketballPlayer> {
         this.finals = finals;
         this.drafted = drafted;
         this.partidos = partidos;
+        this.jugadorRecord = jugadorRecord;
     }
 	
 	//Constructor 2
@@ -95,6 +98,10 @@ public class BasketballPlayer implements Comparable <BasketballPlayer> {
 	public void setAssists(Double assists) {
 		this.assists = assists;
 	}
+	
+	public Jugador getJugador(Jugador jugadorRecord) {
+		return jugadorRecord;
+	}
     
     //Propiedad derivada
 
@@ -116,7 +123,7 @@ public class BasketballPlayer implements Comparable <BasketballPlayer> {
 	public String toString() {
 		return "BasketballPlayer [name=" + name + ", height=" + height + ", age=" + age + ", salary=" + salary
 				+ ", points=" + points + ", assists=" + assists + ", finals=" + finals + ", drafted=" + drafted
-				+ ", partidos=" + partidos + ", rol=" + rol + "]";
+				+ ", partidos=" + partidos + ", rol=" + rol + ", jugadorRecord=" + jugadorRecord + "]";
 	}
     
     //Criterio de igualdad

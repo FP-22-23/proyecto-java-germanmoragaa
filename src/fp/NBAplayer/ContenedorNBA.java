@@ -1,11 +1,15 @@
 package fp.NBAplayer;
 
 import java.util.ArrayList;
+
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.SortedMap;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -83,6 +87,8 @@ private List<BasketballPlayer> jugadores;
 		return "ContenedorNBA [jugadores=" + jugadores + "]";
 	}
 
+    //ENTREGA 2
+    
     //1. Existe un jugador que gane mas de n dólares
     
 	public Boolean existeJugadorQueGaneMas(Integer n) {
@@ -152,5 +158,98 @@ private List<BasketballPlayer> jugadores;
 
 	    return mapa;
 	}
-}
+	
+	//ENTREGA 3
+	
+	//1. Existe un jugador que promedie n puntos o más y tenga una edad mayor o igual a m
+	
+	public Boolean existeJugadorQuePromedieNPuntosConMEdad(Double n, Integer m) {
+	    return jugadores.stream().filter(jugador -> jugador.getAge() <= m).anyMatch(jugador -> jugador.getPoints()>= n); 
+	}
 
+
+	//2. Media de puntos para jugadores en un rango de edad determinada
+
+	public Double mediaPuntosJugadoresEnRangoEdad(Integer edadMin, Integer edadMax) {
+		return jugadores.stream().filter(jugador -> jugador.getAge() >= edadMin && jugador.getAge() <= edadMax).mapToDouble(jugador -> jugador.getPoints()).average().orElse(Double.NaN); 
+	}
+
+	//3. Selección con filtrado para filtrar por altura
+	
+	public List<BasketballPlayer> filtrarPorAltura(Integer altura) {
+		 return jugadores.stream().filter(jugador -> jugador.getHeight() == altura).toList();
+			}
+
+	//4. Un máximo/mínimo con filtrado
+	
+	public BasketballPlayer jugadorConMasPuntosMayorQueN(Integer n) {
+	    return jugadores.stream().filter(jugador -> jugador.getAge() >= n).max(Comparator.comparing(BasketballPlayer::getAssists)).orElse(null);
+	}
+	
+	//5. Una selección, con filtrado y ordenación
+	
+	public List<BasketballPlayer> filtrarPorAlturaOrdenadoPorSalario(Integer altura) {
+	    return jugadores.stream().filter(jugador -> jugador.getHeight() == altura).sorted(Comparator.comparingDouble(BasketballPlayer::getSalary)).toList(); 
+	}
+	
+	//6. Map que agrupa las edades de los jugadores con la suma de APP de todos los de dicha edad (Con streams)
+	
+	public Map<Integer, Double> acumularPorAsistencias() {
+		return jugadores.stream().collect(Collectors.groupingBy(BasketballPlayer::getAge, Collectors.summingDouble(BasketballPlayer::getAssists)));
+	}
+	
+	//7. Función que agrupa los nombres de los jugadores por el rol al que pertenecen
+	
+	public Map<Rol, List<String>> agruparJugadoresPorRol() {
+		return this.jugadores.stream().collect(Collectors.groupingBy(BasketballPlayer::getRol,TreeMap::new,Collectors.mapping(BasketballPlayer::getName, Collectors.toList())));
+		}
+	
+	//8. Método que nos devuelve el nombre del jugador mejor pagado para cada altura
+	
+	public Map<Integer, String> jugadoresMasPagadosPorAltura() {
+	    return jugadores.stream()
+	            .collect(Collectors.groupingBy(BasketballPlayer::getHeight,
+	                    Collectors.collectingAndThen(
+	                            Collectors.maxBy(Comparator.comparing(BasketballPlayer::getSalary)),
+	                            player -> player.map(BasketballPlayer::getName).orElse(null)
+	                    )
+	            ));
+	}
+	
+	//9.  Método que nos agrupa los jugadores por altura, organizados por salario de mayor a menor y con un limite de n jugadores por altura
+	
+	public SortedMap<Integer, List<String>> agrupaJugadoresPorAlturaEnFuncionDelSalario(Integer n) {
+		 return jugadores.stream()
+		            .collect(Collectors.groupingBy(BasketballPlayer::getHeight,
+		                    Collectors.collectingAndThen(Collectors.toList(),
+		                            listaJugadores -> listaJugadores.stream()
+		                                    .sorted(Comparator.comparingDouble(BasketballPlayer::getSalary).reversed())
+		                                    .limit(n)
+		                                    .map(BasketballPlayer::getName)
+		                                    .collect(Collectors.toList()))))
+		            .entrySet().stream()
+		            .sorted(Map.Entry.comparingByKey())
+		            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (a, b) -> b, TreeMap::new));
+		}
+	
+	//10. Metodo que nos devuelve el jugador con mas PPP+APP a partir del maximo de un Map de los jugadores con su producción 
+	
+	public String jugadorMVP() {
+	    Map<String, Double> ratios = jugadoresPorProduccion();
+	    return ratios.entrySet().stream()
+	            .max(Map.Entry.comparingByValue())
+	            .map(Map.Entry::getKey)
+	            .orElse(null);
+	}
+
+	public Map<String, Double> jugadoresPorProduccion() {
+	    return jugadores.stream()
+	            .filter(jugador -> jugador.getSalary() > 0)
+	            .collect(Collectors.toMap(
+	                    BasketballPlayer::getName,
+	                    jugador -> (jugador.getPoints() + jugador.getAssists()),
+	                    (val1, val2) -> val1,
+	                    HashMap::new 
+	            ));
+	}
+}
